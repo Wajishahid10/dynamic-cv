@@ -19,10 +19,10 @@ def get_company_research(company_name):
         return f"Could not fetch research: {e}"
 
 def generate_latex_resume(api_key, profile_json, jd, company_info):
-    """Calls Gemini 1.5 Flash to generate the LaTeX code."""
+    """Calls Gemini 2.5 Flash to generate the LaTeX code."""
     genai.configure(api_key=api_key)
-    # Gemini 1.5 Flash is highly capable and heavily featured in the free tier
-    model = genai.GenerativeModel('gemini-1.5-flash') 
+    # Gemini 2.5 Flash is highly capable and heavily featured in the free tier
+    model = genai.GenerativeModel('gemini-2.5-flash') 
     
     prompt = f"""
     You are an expert technical recruiter and resume writer. 
