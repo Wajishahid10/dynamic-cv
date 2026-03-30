@@ -18,7 +18,7 @@ def get_company_research(company_name):
     except Exception as e:
         return f"Could not fetch research: {e}"
 
-def generate_latex_resume(api_key, master_json, jd, company_info):
+def generate_latex_resume(api_key, profile_json, jd, company_info):
     """Calls Gemini 1.5 Flash to generate the LaTeX code."""
     genai.configure(api_key=api_key)
     # Gemini 1.5 Flash is highly capable and heavily featured in the free tier
@@ -26,7 +26,7 @@ def generate_latex_resume(api_key, master_json, jd, company_info):
     
     prompt = f"""
     You are an expert technical recruiter and resume writer. 
-    I will provide my master resume data (JSON), a Job Description, and Company Research.
+    I will provide my profile resume data (JSON), a Job Description, and Company Research.
     
     Your task:
     1. Select ONLY the skills and projects from my JSON that are highly relevant to the Job Description.
@@ -34,7 +34,7 @@ def generate_latex_resume(api_key, master_json, jd, company_info):
     3. Output the final customized resume STRICTLY as raw LaTeX code based on the famous "Jake's Resume" template.
     4. DO NOT wrap the output in markdown blocks (e.g., ```latex). Start directly with \documentclass.
     
-    Master Data: {json.dumps(master_json)}
+    Profile Data: {json.dumps(profile_json)}
     Job Description: {jd}
     Company Research: {company_info}
     """
@@ -72,51 +72,52 @@ def compile_latex_to_pdf(latex_code):
 st.title("📄 AI ATS Resume Generator")
 st.markdown("Tailor your baseline resume to a specific job description instantly.")
 
-gemini_api_key = ""
-uploaded_profile = ""
+# gemini_api_key = ""
+# uploaded_profile = ""
 
 # Sidebar for Setup
 with st.sidebar:
     st.header("⚙️ Configuration")
-    try:
-        gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
-    except Exception:
-        gemini_api_key = st.text_input("Gemini API Key", type="password", help="Get this free from Google AI Studio")
-        # st.secrets.set("GEMINI_API_KEY", gemini_api_key)
-    # gemini_api_key = st.text_input("Gemini API Key", type="password", help="Get this free from Google AI Studio")
-    st.markdown("---")
     st.write("Load Profile Data")
-    uploaded_profile = st.file_uploader("Upload profile.json", type=["json"])
+    uploaded_profile = st.file_uploader("Upload profile_data.json", type=["json"])
+    
+    # Retrieve the API key from secrets securely
+    try:
+        gemini_api_key = st.secrets["GEMINI_API_KEY"]
+    except KeyError:
+        st.error("API Key not found! Please add 'GEMINI_API_KEY' to your Streamlit secrets.")
+        st.stop() # Stops the app from running further until fixed
 
 # Main Area for Job Inputs
-company_name = st.text_input("Company Name", placeholder="e.g. Google, Stripe, Local Startup")
-job_description = st.text_area("Job Description", height=200, placeholder="Paste the full job description here...")
+company_name = st.text_input("Company Name (Optional)", placeholder="e.g. Salesforce, Google")
+job_description = st.text_area("Job Description (Required)", height=200, placeholder="Paste the full job description here...")
 
 if st.button("🚀 Generate Tailored Resume", type="primary"):
-    if not gemini_api_key:
-        st.error("Please enter your Gemini API Key in the sidebar.")
-    elif not job_description:
-        st.error("Please provide Job Description.")
+    # Only check for job_description now
+    if not job_description:
+        st.error("Please provide the Job Description.")
     else:
         with st.status("Crafting your resume...", expanded=True) as status:
             
             # 1. Load Data
             st.write("Loading baseline skills...")
             if uploaded_profile:
-                master_data = json.load(uploaded_profile)
+                profile_data = json.load(uploaded_profile)
             else:
-                # Fallback to local file if not uploaded
-                with open("master_data.json", "r") as f:
-                    master_data = json.load(f)
+                with open("profile_data.json", "r") as f:
+                    profile_data = json.load(f)
             
-            # 2. Research Company
-            if company_name:
+            # 2. Conditional Company Research
+            if company_name.strip(): # Checks if it's not empty
                 st.write(f"Researching {company_name} on the web...")
                 company_research = get_company_research(company_name)
+            else:
+                st.write("No company provided. Skipping web research...")
+                company_research = "No specific company targeted. Focus purely on the Job Description."
             
             # 3. Generate LaTeX
             st.write("Analyzing JD and writing LaTeX (this takes a few seconds)...")
-            latex_code = generate_latex_resume(gemini_api_key, master_data, job_description, company_research)
+            latex_code = generate_latex_resume(gemini_api_key, profile_data, job_description, company_research)
             
             # 4. Compile PDF
             st.write("Compiling PDF...")
