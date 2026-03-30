@@ -72,10 +72,12 @@ def compile_latex_to_pdf(latex_code):
 st.title("📄 AI ATS Resume Generator")
 st.markdown("Tailor your baseline resume to a specific job description instantly.")
 
+gemini_api_key = ""
+uploaded_profile = ""
+
 # Sidebar for Setup
 with st.sidebar:
     st.header("⚙️ Configuration")
-    gemini_api_key = ""
     try:
         gemini_api_key = st.secrets.get("GEMINI_API_KEY", "")
     except Exception:
@@ -83,8 +85,8 @@ with st.sidebar:
         # st.secrets.set("GEMINI_API_KEY", gemini_api_key)
     # gemini_api_key = st.text_input("Gemini API Key", type="password", help="Get this free from Google AI Studio")
     st.markdown("---")
-    st.write("Load Master Data")
-    uploaded_master = st.file_uploader("Upload master_data.json", type=["json"])
+    st.write("Load Profile Data")
+    uploaded_profile = st.file_uploader("Upload profile.json", type=["json"])
 
 # Main Area for Job Inputs
 company_name = st.text_input("Company Name", placeholder="e.g. Google, Stripe, Local Startup")
@@ -93,23 +95,24 @@ job_description = st.text_area("Job Description", height=200, placeholder="Paste
 if st.button("🚀 Generate Tailored Resume", type="primary"):
     if not gemini_api_key:
         st.error("Please enter your Gemini API Key in the sidebar.")
-    elif not company_name or not job_description:
-        st.error("Please provide both the Company Name and Job Description.")
+    elif not job_description:
+        st.error("Please provide Job Description.")
     else:
         with st.status("Crafting your resume...", expanded=True) as status:
             
             # 1. Load Data
             st.write("Loading baseline skills...")
-            if uploaded_master:
-                master_data = json.load(uploaded_master)
+            if uploaded_profile:
+                master_data = json.load(uploaded_profile)
             else:
                 # Fallback to local file if not uploaded
                 with open("master_data.json", "r") as f:
                     master_data = json.load(f)
             
             # 2. Research Company
-            st.write(f"Researching {company_name} on the web...")
-            company_research = get_company_research(company_name)
+            if company_name:
+                st.write(f"Researching {company_name} on the web...")
+                company_research = get_company_research(company_name)
             
             # 3. Generate LaTeX
             st.write("Analyzing JD and writing LaTeX (this takes a few seconds)...")
