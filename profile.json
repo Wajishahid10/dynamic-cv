@@ -1,0 +1,17 @@
+{
+  "personal_info": {
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "123-456-7890",
+    "linkedin": "linkedin.com/in/johndoe",
+    "github": "github.com/johndoe"
+  },
+  "skills": ["Python", "Streamlit", "Machine Learning", "Data Analysis", "SQL", "Git"],
+  "projects": [
+    {
+      "name": "AI Resume Builder",
+      "description": "Built a Streamlit web app using Gemini API to generate ATS-friendly LaTeX resumes.",
+      "technologies": ["Python", "Streamlit", "LLMs"]
+    }
+  ]
+}
