@@ -2,20 +2,23 @@ import streamlit as st
 import json
 import os
 import subprocess
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from ddgs import DDGS
 
 # --- PAGE CONFIG ---
 st.set_page_config(page_title="AI Resume Tailor", page_icon="📄", layout="centered")
 
 # --- INITIALIZE SESSION STATE & SECRETS ---
-# Configure Gemini
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+# Initialize the new Gemini Client
+client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 # Load default CV from secrets into session state if it doesn't exist
 if "cv_data" not in st.session_state:
     try:
-        st.session_state.cv_data = json.loads(st.secrets["DEFAULT_CV"], strict=False)
+        # strict=False helps ignore hidden control characters in the TOML string
+        st.session_state.cv_data = json.loads(st.secrets["DEFAULT_CV"])
+        # st.write(st.session_state.cv_data)
     except KeyError:
         st.session_state.cv_data = {}
         st.warning("No DEFAULT_CV found in Streamlit Secrets. Please upload a JSON file.")
@@ -41,12 +44,7 @@ def escape_latex(text):
     return text
 
 def tailor_cv_with_ai(base_cv, jd, company_info):
-    """Uses Gemini 1.5 Flash to tailor the CV and returns a JSON object."""
-    model = genai.GenerativeModel(
-        'gemini-1.5-flash', 
-        generation_config={"response_mime_type": "application/json"}
-    )
-    
+    """Uses Gemini 1.5 Flash via the new SDK to tailor the CV and returns a JSON object."""
     prompt = f"""
     You are an expert ATS-friendly resume writer. Your task is to take the candidate's Base CV (JSON format) 
     and tailor it to the provided Job Description and Company Research.
@@ -62,7 +60,15 @@ def tailor_cv_with_ai(base_cv, jd, company_info):
     Company Research: {company_info}
     """
     
-    response = model.generate_content(prompt)
+    # Use the new models.generate_content syntax
+    response = client.models.generate_content(
+        model='gemini-1.5-flash',
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            response_mime_type="application/json",
+        )
+    )
+    
     return json.loads(response.text)
 
 def generate_latex_content(cv_json):
