@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-from duckduckgo_search import DDGS
+from ddgs import DDGS
 import json
 import subprocess
 import os

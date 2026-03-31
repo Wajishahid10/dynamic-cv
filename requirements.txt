@@ -1,4 +1,4 @@
 streamlit
 google-generativeai
-duckduckgo-search
+ddgs
 pdfplumber
