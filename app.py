@@ -15,7 +15,7 @@ genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 # Load default CV from secrets into session state if it doesn't exist
 if "cv_data" not in st.session_state:
     try:
-        st.session_state.cv_data = json.loads(st.secrets["DEFAULT_CV"])
+        st.session_state.cv_data = json.loads(st.secrets["DEFAULT_CV"], strict=False)
     except KeyError:
         st.session_state.cv_data = {}
         st.warning("No DEFAULT_CV found in Streamlit Secrets. Please upload a JSON file.")
