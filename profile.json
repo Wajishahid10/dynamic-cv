@@ -1,17 +1,184 @@
 {
-  "personal_info": {
-    "name": "John Doe",
-    "email": "john@example.com",
-    "phone": "123-456-7890",
-    "linkedin": "linkedin.com/in/johndoe",
-    "github": "github.com/johndoe"
+  "basics": {
+    "name": "Muhammad Wajahat Shahid",
+    "email": "wajishahid10@gmail.com",
+    "phone": "+92 332 7487274",
+    "location": "Lahore, Pakistan",
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "url": "linkedin.com/in/wajahatshahid"
+      },
+      {
+        "network": "Trailhead",
+        "url": "trailblazer/wajahatshahid"
+      }
+    ],
+    "summary": "Senior Salesforce Developer with 4+ years of experience delivering enterprise-grade solutions across Sales Cloud, Service Cloud, Experience Cloud, and Non-Profit Cloud. Certified Platform Developer I with deep expertise in Apex, Lightning Web Components (LWC), REST/SOAP API integrations, CPQ, and CI/CD pipeline management via SFDX and Unlocked Packages. Proven record of 10x efficiency gains and 40% reduced development cycles. Agentblazer Champion with Agentforce Al experience. Adept at leading cross-functional Agile/Scrum teams globally to deliver scalable, governor-limit-compliant Salesforce architecture."
   },
-  "skills": ["Python", "Streamlit", "Machine Learning", "Data Analysis", "SQL", "Git"],
+  "certifications": [
+    "Salesforce Certified Platform Developer I (PD1)",
+    "Salesforce Certified Platform Foundations",
+    "Trailhead: Four Star Ranger | 400+ Badges | 300k+ Points | Agentblazer Champion"
+  ],
+  "experience": [
+    {
+      "company": "PixelEdge",
+      "position": "Senior Software Engineer - Salesforce",
+      "location": "Hybrid, Lahore, Pakistan",
+      "startDate": "Jun. 2025",
+      "endDate": "Present",
+      "highlights": [
+        "Architected and developed Non-Profit Cloud applications aligned to stakeholder requirements, applying scalable Apex design patterns, object modeling, and field-level security best practices.",
+        "Led legacy automation modernization, migrating Process Builder workflows to Flow Builder, reducing technical debt and improving org maintainability across the full SDLC.",
+        "Implemented Custom Metadata Types and Platform Events to decouple business logic and improve org configurability without code deployments.",
+        "Conducted code reviews, enforced governor limit compliance, and established development standards to ensure long-term Salesforce org health.",
+        "Coordinated cross-functional Agile/Scrum delivery across developers, admins, QA, and business stakeholders, maintaining 100% sprint completion focus."
+      ]
+    },
+    {
+      "company": "Olympus-Grid",
+      "position": "Salesforce Developer",
+      "location": "Remote",
+      "startDate": "May 2024",
+      "endDate": "May 2025",
+      "highlights": [
+        "Designed and delivered end-to-end Salesforce solutions using Apex classes, triggers, batch jobs, queueable patterns, and LWC components with REST and SOAP API integrations.",
+        "Built a dynamic drag-and-drop Schema Builder in Lightning Web Components (LWC), reducing admin configuration time by 50%.",
+        "Engineered a multi-object CRUD system spanning Salesforce SObject, Google Firestore, and AWS DynamoDB via Apex callouts and named credentials, saving 40% development time.",
+        "Used Postman for REST API testing and documentation; integrated Connected Apps with OAuth 2.0 and JWT for secure third-party authentication.",
+        "Managed sandbox environments, change set deployments, and production release cycles ensuring regression-free delivery.",
+        "Led technical solutioning across global Agile teams on three continents, translating business requirements into scalable Salesforce architecture with clear technical documentation."
+      ]
+    },
+    {
+      "company": "Rolustech",
+      "position": "Software Engineer - Salesforce",
+      "location": "Lahore, Pakistan",
+      "startDate": "Jun. 2023",
+      "endDate": "May 2024",
+      "highlights": [
+        "Refactored Apex codebase and optimized governor limit management of Rolustech's flagship AppExchange product, achieving a 10x improvement in platform efficiency.",
+        "Modernized CI/CD deployment pipeline with SFDX, Unlocked Packages, and 2GP Managed Packages, improving release efficiency by 30% and enabling modular, version-controlled deployments.",
+        "Published multiple enterprise-grade apps to AppExchange, adhering to Salesforce security review standards and ISV packaging best practices.",
+        "Designed and implemented CPQ configurations including product rules, pricing rules, and quote templates to automate complex B2B quoting workflows."
+      ]
+    },
+    {
+      "company": "Rolustech",
+      "position": "Associate Software Engineer - Salesforce",
+      "location": "Lahore, Pakistan",
+      "startDate": "Jun. 2022",
+      "endDate": "May 2023",
+      "highlights": [
+        "Delivered Salesforce CRM solutions using declarative tools (Flow, Process Builder, Approval Processes, Validation Rules) and programmatic development (Apex, LWC, Visualforce).",
+        "Integrated Salesforce with Twilio, Gmail, Outlook, Mailchimp, LinkedIn, Stripe, and Heroku using REST APIs, Apex callouts, and OAuth 2.0 authentication.",
+        "Implemented Open CTI for telephony integration, Einstein Activity Capture for CRM data enrichment, and Zapier for cross-platform workflow automation.",
+        "Wrote optimized SOQL and SOSL queries with bulkification best practices to process large data volumes within governor limits."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Engineering and Technology (UET) Lahore",
+      "studyType": "Bachelor of Science",
+      "area": "Computer Science",
+      "gpa": "3.53/4.0",
+      "location": "Lahore, Pakistan",
+      "startDate": "Aug. 2018",
+      "endDate": "May 2022",
+      "courses": [
+        "OOP, Data Structures & Algorithms, Software Engineering, UI/UX Design, Database Management Systems, Mobile App Development, Artificial Intelligence, Information Security"
+      ]
+    }
+  ],
   "projects": [
     {
-      "name": "AI Resume Builder",
-      "description": "Built a Streamlit web app using Gemini API to generate ATS-friendly LaTeX resumes.",
-      "technologies": ["Python", "Streamlit", "LLMs"]
+      "name": "RolusGPT AI-Powered Salesforce Chatbot",
+      "date": "2023 - 2024",
+      "technologies": [
+        "Salesforce, LWC, Python, FastAPI, Heroku, ChatGPT API"
+      ],
+      "highlights": [
+        "Rearchitected Al response pipeline for 10x faster query processing and 35% improvement in response accuracy by integrating ChatGPT API with Salesforce via Apex callouts and named credentials.",
+        "Built and deployed Python REST APIs using FastAPI on Heroku; connected to Salesforce via Connected Apps with OAuth 2.0.",
+        "Developed an LWC-based conversational chatbot interface providing 60% faster data access;",
+        "implemented Tabulator.js and Chart.js for real-time data visualization inside Salesforce."
+      ]
+    },
+    {
+      "name": "Clinux - Healthcare Appointment Booking Platform",
+      "date": "2023",
+      "technologies": [
+        "Service Cloud, Experience Cloud, Apex, Flow"
+      ],
+      "highlights": [
+        "Architected a patient-facing Appointment Booking portal on Experience Cloud, improving scheduling efficiency by 35% via custom Apex controllers and dynamic LWC components.",
+        "Integrated FullCalendar.js for real-time scheduling; built automated reminder workflows using Flow and Platform Events, improving operational efficiency by 45%.",
+        "Configured Service Cloud case management, entitlement rules, and escalation workflows to streamline patient support operations."
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Salesforce Clouds",
+      "keywords": [
+        "Sales Cloud, Service Cloud, Experience Cloud, Non-Profit Cloud"
+      ]
+    },
+    {
+      "category": "AI & Automation",
+      "keywords": [
+        "Agentforce, Einstein Activity Capture, Flow Builder, Process Builder, Approval Processes, Platform Events, Change Data Capture"
+      ]
+    },
+    {
+      "category": "Salesforce Features",
+      "keywords": [
+        "CPQ, Lightning App Builder, Dynamic Forms, Dynamic Actions, Schema Builder, Validation Rules, Duplicate Rules, Connected Apps, Web-to-Lead, Web-to-Case, SSO, Reports & Dashboards"
+      ]
+    },
+    {
+      "category": "Development",
+      "keywords": [
+        "Apex (Triggers, Queueable, Batch, Scheduled, Future), SOQL, SOSL, LWC, Aura, Visualforce, Custom Metadata Types"
+      ]
+    },
+    {
+      "category": "APIs & Integrations",
+      "keywords": [
+        "REST API, SOAP API, Bulk API, Streaming API, Named Credentials, OAuth 2.0, JWT, Twilio, Stripe, Mailchimp, Heroku, Zapier, ChatGPT API, Google Workspace"
+      ]
+    },
+    {
+      "category": "CI/CD & Deployment",
+      "keywords": [
+        "SFDX (Salesforce CLI), Unlocked Packages, 2GP Managed Packages, Change Sets, AppExchange Publishing, Sandbox Management"
+      ]
+    },
+    {
+      "category": "Data & Security",
+      "keywords": [
+        "Data Loader, Workbench, Profiles, Permission Sets, Permission Set Groups, Sharing Rules, Role Hierarchy, Field-Level Security, OWD, Record Types"
+      ]
+    },
+    {
+      "category": "Developer Tools",
+      "keywords": [
+        "Git, GitHub, GitLab, Postman, VS Code, Jira, Slack"
+      ]
+    },
+    {
+      "category": "Languages",
+      "keywords": [
+        "JavaScript, HTML, CSS, Python, Java, C#, Kotlin, Dart"
+      ]
+    },
+    {
+      "category": "Methodologies",
+      "keywords": [
+        "Agile, Scrum, SDLC, Code Review, Technical Documentation, Stakeholder Communication"
+      ]
     }
   ]
 }
